@@ -2,60 +2,86 @@
 
 for i in range(0, 101, 1):
     print(i)
-    i += 1
 
 # 2) Desarrolla un programa que solicite al usuario un número entero y determine la cantidad de dígitos que contiene. 
 
-numero = int(input("Ingrese un número entero: "))
-numero = abs(numero)
+numero = input("Ingrese un número: ")
 contador = 0
+ban= False
 
-while numero > 0:
-    numero = numero // 10
-    contador += 1
+numero = input("Ingrese un número: ")
+contador = 0
+ban= False
 
-print("Cantidad de dígitos:", contador)
+if numero.isdigit():
+    numero = int(numero)
+    while numero > 0:
+        numero = numero // 10
+        contador += 1
+        ban = True
+    print("Cantidad de dígitos:", contador)
+else:
+    print("dato ingresado no valido")
 
 # 3) Escribe un programa que sume todos los números enteros comprendidos entre dos valores dados por el usuario, excluyendo esos dos valores.
 
-num1 = int(input("Ingrese el primer numero: "))
-num2 = int(input("Ingrese el segundo numero: "))
-lista = list(range(num1, num2))
+num1 = input("Ingrese el primer numero: ")
+num2 = input("Ingrese el segundo numero: ")
 resul = 0
 
-for num in range(num1 +1, num2, 1):
-    resul = num + resul
-
-print(resul)
+if num1.isdigit() and num2.isdigit():
+    num1 = int(num1)
+    num2 = int(num2)
+    lista = list(range(num1, num2))
+    for num in range(num1 +1, num2, 1):
+        resul = num + resul
+    print(resul)
+else:
+    print("dato ingresado no valido")
 
 # 4) Elabora un programa que permita al usuario ingresar números enteros y los sume en secuencia. El programa debe detenerse y mostrar el total acumulado cuando el usuario ingrese un 0. 
 
-num1 = int(input("Ingrese un numero:"))
-num = num1
+num1 = input("Ingrese un numero: ")
 num2 = 3
 
-while num2 > 0:
-    num2 = int(input("Ingrese un numero:"))
-    num = num + num2
-    i = num2
-    print(f"{num-num2} + {num2} = {num}")
+if num1.isdigit():
+    num1 = int(num1)
+    num = num1
+    while num2 > 0:
+        num2 = input("Ingrese un numero: ")
+        if num2.isdigit():
+            num2 = int(num2)
+            num = num + num2
+            i = num2
+            print(f"{num-num2} + {num2} = {num}")
+        else:
+            pass
+else:
+    print("dato ingresado invalido")
 
 # 5) Crea un juego en el que el usuario deba adivinar un número aleatorio entre 0 y 9. Al final, el programa debe mostrar cuántos intentos fueron necesarios para acertar el número. 
 
 import random
 
-num = random.randint(0, 9)
+num = random.randint(0, 10)
 i = False
 contador = 0
 
 while i == False:
-    num_1 = int(input("Intente adivinar el numero: "))
-    if num_1 != num:
-        contador = contador + 1
+    num_1 = input("Intente adivinar el numero: ")
+    if num_1.isdigit():
+        num_1 = int(num_1)
+        if num_1 in range(0,10):
+            if num_1 != num:
+                contador = contador + 1
+            else:
+                i = True
+        else:
+            print("numero ingresado fuera de rango")
     else:
-        i = True
-
-print(f"Bien hecho, lo encontraste en {contador} intento")
+        print("dato ingresado invalido, intentelo otra vez.")
+if i == True:
+    print(f"Bien hecho, lo encontraste en {contador} intento")
 
 # 6) Desarrolla un programa que imprima en pantalla todos los números pares comprendidos entre 0 y 100, en orden decreciente. 
 
@@ -65,16 +91,20 @@ for i in range(100, 0, -1):
 
 # 7) Crea un programa que calcule la suma de todos los números comprendidos entre 0 y un número entero positivo indicado por el usuario.
 
-num = int(input("ingrese un numero: "))
+num = input("ingrese un numero: ")
 resul = 0
 
-for i in range(0, num + 1, 1):
-    resul = resul + i
-    print (f"{i} + {resul - i} = {resul} ")
+if num.isdigit():
+    num = int(num)
+    for i in range(0, num + 1, 1):
+        resul = resul + i
+        print (f"{i} + {resul - i} = {resul} ")
+else:
+    print("dato ingresado invalido")
 
 # 8) Escribe un programa que permita al usuario ingresar 100 números enteros. Luego, el programa debe indicar cuántos de estos números son pares, cuántos son impares, cuántos son negativos y cuántos son positivos. (Nota: para probar el programa puedes usar una cantidad menor, pero debe estar preparado para procesar 100 números con un solo cambio). 
 
-contador = 2
+contador = 100
 cero = 0
 con_par = 0
 con_impar = 0
@@ -82,31 +112,46 @@ con_nega = 0
 con_posi = 0
 
 for i in range(0, contador, 1):
-    num = int(input("Ingrese un numero: "))
-    if num % 2 == 0:
-        con_par = con_par + 1
+    num = input("Ingrese un numero: ")
+    if num.isdigit():
+        num = int(num)
+        if num % 2 == 0:
+            con_par = con_par + 1
+        else:
+            con_impar = con_impar + 1
+        
+        if num > 0:
+            con_posi = con_posi + 1
+        elif num < 0:
+            con_nega = con_nega + 1
+        else:
+            cero = cero + 1
     else:
-        con_impar = con_impar + 1
-    
-    if num > 0:
-        con_posi = con_posi + 1
-    elif num < 0:
-        con_nega = con_nega + 1
-    else:
-        cero = cero + 1
-
+        print("dato ingresado invalido")
 
 print(f"Hay: \n{con_par} par \n{con_impar} inpar \n{con_posi} positivos \n{con_nega} negativos \n{cero} ceros.")
 
 # 9) Elabora un programa que permita al usuario ingresar 100 números enteros y luego calcule la media de esos valores. (Nota: puedes probar el programa con una cantidad menor, pero debe poder procesar 100 números cambiando solo un valor). 
 
-contador = 100
-resul = 0
+contador = 5
+x = False
 
-for i in range(0, contador, 1):
-    num = int(input("Ingrese un numero: "))
-    resul = resul + num
-    media = resul / contador
+while x == False:
+    ban = 0
+    resul = 0
+    media = 0
+    for i in range(0, contador, 1):
+        num = input("Ingrese un numero: ")
+        if num.isdigit():
+            num = int(num)
+            resul = resul + num
+            media = resul / contador
+            ban = ban +1
+        else:
+            print("dato ingresado invalido, intentelo de nuevo.")
+            break
+    if ban == contador:
+        x = True
 
 print(f"la suma de los {contador} numeros es de {resul} y su media seria {media}")
 
